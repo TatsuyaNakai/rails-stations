@@ -21,7 +21,7 @@ module Admin
 
       respond_to do |format|
         if @movie.save
-          format.html { redirect_to admin_movies_path, notice: "Model name was successfully created." }
+          format.html { redirect_to admin_movies_path, notice: "Movieを新規作成しました" }
           format.json { render :index, status: :created, location: @movie }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -34,7 +34,7 @@ module Admin
     def update
       respond_to do |format|
         if @movie.update(movie_params)
-          format.html { redirect_to admin_movies_path, notice: "Model name was successfully updated." }
+          format.html { redirect_to admin_movies_path, notice: "Movieを更新しました" }
           format.json { render :index, status: :ok, location: @movie }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -45,10 +45,14 @@ module Admin
 
     # DELETE /movies/1 or /movies/1.json
     def destroy
-      @movie.destroy
       respond_to do |format|
-        format.html { redirect_to movies_url, notice: "Model name was successfully destroyed." }
-        format.json { head :no_content }
+        if @movie.destroy
+          format.html { redirect_to admin_movies_url, notice: "Movieを削除しました" }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to admin_movies_url, alert: @movie.errors.full_messages.join(', ') }
+          format.json { render json: @movie.errors, status: :unprocessable_entity }
+        end
       end
     end
 

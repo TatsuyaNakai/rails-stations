@@ -16,6 +16,9 @@
 #  index_movies_on_name  (name)
 #
 class Movie < ApplicationRecord
+  # フック
+  before_destroy :check_is_showing_false
+
   # バリデーション
   validates :name, presence: true,
                    uniqueness: true,
@@ -35,4 +38,14 @@ class Movie < ApplicationRecord
                         url: true
 
   validates :is_showing, inclusion: [true, false]
+
+  # メソッド(Private)
+
+  private
+
+  def check_is_showing_false
+    errors.add(:base, '上映中の作品は削除できません') if is_showing?
+
+    throw :abort unless errors.empty?
+  end
 end

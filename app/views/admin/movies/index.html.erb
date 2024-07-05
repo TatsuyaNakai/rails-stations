@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Movies</h1>
 
+<hr>
 <div class="admin-container">
   <%= render '/admin/shared/sidebar' %>
 
@@ -17,7 +16,7 @@
           <th>is_showing</th>
           <th>created_at</th>
           <th>updated_at</th>
-          <th colspan="3"></th>
+          <th colspan="2"></th>
         </tr>
       </thead>
 
@@ -32,8 +31,8 @@
             <td><%= movie.is_showing ? '上映中' : '上映予定' %></td>
             <td><%= movie.created_at %></td>
             <td><%= movie.updated_at %></td>
-            <td><%= link_to 'Edit', edit_admin_movie_path(movie), class: 'button' %></td>
-            <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %></td>
+            <td><%= link_to '編集', edit_admin_movie_path(movie), class: 'button' %></td>
+            <td><%= link_to '削除', admin_movie_path(movie), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'button' %></td>
           </tr>
         <% end %>
       </tbody>
@@ -41,6 +40,6 @@
 
     <br>
 
-    <%= link_to 'New Movie', new_admin_movie_path, class: 'button' %>
+    <%= link_to '新規作成', new_admin_movie_path, class: 'button' %>
   </div>
 </div>
