@@ -1,4 +1,4 @@
-<%= form_with(model: movie, url: admin_movies_path, local: true, class: 'admin-form') do |f| %>
+<%= form_with(model: movie, url: url, local: true, class: 'admin-form') do |f| %>
   <% if movie.errors.any? %>
     <div id="error_explanation" class="error_explanation">
       <h2><%= movie.errors.count.to_s(:delimited) %>件のエラーがあります</h2>

@@ -1,14 +1,11 @@
 module Admin
   class MoviesController < ApplicationController
-    before_action :set_movie, only: [:show, :edit, :update, :destroy]
+    before_action :set_movie, only: [:edit, :update, :destroy]
 
     # GET /movies or /movies.json
     def index
       @movies = Movie.all
     end
-
-    # GET /movies/1 or /movies/1.json
-    def show; end
 
     # GET /movies/new
     def new
@@ -24,8 +21,8 @@ module Admin
 
       respond_to do |format|
         if @movie.save
-          format.html { redirect_to @movie, notice: "Model name was successfully created." }
-          format.json { render :show, status: :created, location: @movie }
+          format.html { redirect_to admin_movies_path, notice: "Model name was successfully created." }
+          format.json { render :index, status: :created, location: @movie }
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @movie.errors, status: :unprocessable_entity }
@@ -37,8 +34,8 @@ module Admin
     def update
       respond_to do |format|
         if @movie.update(movie_params)
-          format.html { redirect_to @movie, notice: "Model name was successfully updated." }
-          format.json { render :show, status: :ok, location: @movie }
+          format.html { redirect_to admin_movies_path, notice: "Model name was successfully updated." }
+          format.json { render :index, status: :ok, location: @movie }
         else
           format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @movie.errors, status: :unprocessable_entity }
