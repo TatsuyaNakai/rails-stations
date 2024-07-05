@@ -1,0 +1,15 @@
+<h1>Movies</h1>
+
+<div class="movies">
+  <% @movies.each do |movie| %>
+    <div class="movie">
+      <h2><%= movie.name %></h2>
+      <% if movie.image_url.present? %>
+        <p><%= image_tag(movie.image_url, alt: movie.name) %></p>
+      <% end %>
+      <p><strong>Release Year:</strong> <%= movie.year %></p>
+      <p><strong>Is Showing:</strong> <%= movie.is_showing ? 'Yes' : 'No' %></p>
+      <%= link_to 'View Details', movie_path(movie), class: 'button' %>
+    </div>
+  <% end %>
+</div>

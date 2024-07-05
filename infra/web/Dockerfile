@@ -1,7 +1,12 @@
 FROM ruby:2.7.3
-RUN apt-get update -qq
-RUN apt-get install -y nodejs npm && npm install n -g && n lts
-RUN npm install -g yarn
+ENV TZ Asia/Tokyo
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs
+
+RUN if ! command -v yarn > /dev/null 2>&1; then npm install -g yarn; fi
+
 RUN mkdir /app
 WORKDIR /app
 
