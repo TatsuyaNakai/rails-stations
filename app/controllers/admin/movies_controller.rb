@@ -64,7 +64,7 @@ module Admin
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.fetch(:movie, {})
+      params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)
     end
   end
 end

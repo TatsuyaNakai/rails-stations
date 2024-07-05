@@ -1,7 +1,7 @@
-<%= form_with(model: movie) do |form| %>
+<%= form_with(model: movie, url: admin_movies_path, local: true, class: 'admin-form') do |f| %>
   <% if movie.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+    <div id="error_explanation" class="error_explanation">
+      <h2><%= movie.errors.count.to_s(:delimited) %>件のエラーがあります</h2>
 
       <ul>
         <% movie.errors.full_messages.each do |message| %>
@@ -11,32 +11,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, "Movie Title" %>
-    <%= form.text_field :name, limit: 160, null: false %>
+  <div class="form-group">
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control', limit: 160, null: false %>
   </div>
 
-  <div>
-    <%= form.label :year, "Release Year" %>
-    <%= form.text_field :year, limit: 45 %>
+  <div class="form-group">
+    <%= f.label :year, class: 'form-label' %>
+    <%= f.text_field :year, class: 'form-control', limit: 45 %>
   </div>
 
-  <div>
-    <%= form.label :description, "Description" %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= f.label :description, class: 'form-label' %>
+    <%= f.text_area :description, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :image_url, "Poster Image URL" %>
-    <%= form.text_field :image_url, limit: 150 %>
+  <div class="form-group">
+    <%= f.label :image_url, class: 'form-label' %>
+    <%= f.text_field :image_url, class: 'form-control', limit: 150 %>
   </div>
 
-  <div>
-    <%= form.label :is_showing, "Is Showing?" %>
-    <%= form.check_box :is_showing, null: false %>
+  <div class="form-group">
+    <%= f.label :is_showing, class: 'form-label' %>
+    <%= f.check_box :is_showing, class: 'form-check-input', null: false %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

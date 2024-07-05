@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      movie: 作品
+    attributes:
+      movie:
+        id: ID
+        description: 概要
+        image_url: 画像URL
+        is_showing: 上映中
+        name: タイトル
+        year: 公開年
+        created_at: 登録日時
+        updated_at: 更新日時
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      long: "%Y年%m月%d日(%a) %H時%M分"
+      short: "%y/%m/%d %H:%M"
