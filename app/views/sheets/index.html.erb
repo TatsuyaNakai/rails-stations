@@ -17,23 +17,17 @@
     <tbody>
       <tr>
         <td>A</td>
-        <% @sheets.select { |sheet| sheet.row == 'a' }.each do |sheet| %>
-          <td class="highlight"></td>
-        <% end %>
+        <%= render_rows(@sheets, 'a') %>
         <td>A</td>
       </tr>
       <tr>
         <td>B</td>
-        <% @sheets.select { |sheet| sheet.row == 'b' }.each do |sheet| %>
-          <td class="highlight"></td>
-        <% end %>
+        <%= render_rows(@sheets, 'b') %>
         <td>B</td>
       </tr>
       <tr>
         <td>C</td>
-        <% @sheets.select { |sheet| sheet.row == 'c' }.each do |sheet| %>
-          <td class="highlight"></td>
-        <% end %>
+        <%= render_rows(@sheets, 'c') %>
         <td>C</td>
       </tr>
     </tbody>
