@@ -2,34 +2,46 @@
 
 <h1>Movies</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Year</th>
-      <th>Description</th>
-      <th>Image</th>
-      <th>Is Showing</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="admin-container">
+  <%= render '/admin/shared/sidebar' %>
 
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.name %></td>
-        <td><%= movie.year %></td>
-        <td><%= movie.description %></td>
-        <td><%= image_tag(movie.image_url) if movie.image_url.present? %></td>
-        <td><%= movie.is_showing ? 'Yes' : 'No' %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="admin-content">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>year</th>
+          <th>description</th>
+          <th>image_url</th>
+          <th>is_showing</th>
+          <th>created_at</th>
+          <th>updated_at</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<br>
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+            <td><%= movie.id %></td>
+            <td><%= movie.name %></td>
+            <td><%= movie.year %></td>
+            <td><%= movie.description %></td>
+            <td><%= link_to movie.image_url, movie.image_url %></td>
+            <td><%= movie.is_showing ? '上映中' : '上映予定' %></td>
+            <td><%= movie.created_at %></td>
+            <td><%= movie.updated_at %></td>
+            <td><%= link_to 'Show', movie, class: 'button' %></td>
+            <td><%= link_to 'Edit', edit_admin_movie_path(movie), class: 'button' %></td>
+            <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'New Movies', new_movie_path %>
+    <br>
+
+    <%= link_to 'New Movie', new_admin_movie_path, class: 'button' %>
+  </div>
+</div>
