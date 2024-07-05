@@ -19,5 +19,9 @@ class MoviesController < ApplicationController
   # GET /movies/1 or /movies/1.json
   def show
     @movie = Movie.find(params[:id])
+
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @dates = (-1..3).map { |i| @date + i }
+    @today_schedules = @movie.schedules.where(start_time: @date.all_day)
   end
 end

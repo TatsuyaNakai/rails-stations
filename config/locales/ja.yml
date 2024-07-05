@@ -12,8 +12,13 @@ ja:
         year: 公開年
         created_at: 登録日時
         updated_at: 更新日時
+  date:
+    formats:
+      default: '%Y/%m/%d(%a)'
+      yyyymm: '%Y/%m'
+      yyyymmdd: '%Y/%m/%d'
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
-      long: "%Y年%m月%d日(%a) %H時%M分"
-      short: "%y/%m/%d %H:%M"
+      yyyymmddahhmm: "%Y年%m月%d日(%a) %H時%M分"
+      hhmm: "%-H:%M"

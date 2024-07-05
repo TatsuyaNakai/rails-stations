@@ -16,8 +16,11 @@
 #  index_movies_on_name  (name)
 #
 class Movie < ApplicationRecord
+  # 関連
+  has_many :schedules, dependent: :destroy
+
   # フック
-  before_destroy :check_is_showing_false
+  # before_destroy :check_is_showing_false
 
   # バリデーション
   validates :name, presence: true,
@@ -41,11 +44,12 @@ class Movie < ApplicationRecord
 
   # メソッド(Private)
 
-  private
+  # private
 
-  def check_is_showing_false
-    errors.add(:base, '上映中の作品は削除できません') if is_showing?
+  # Part5の要件に入っているが不要？
+  # def check_is_showing_false
+  #   errors.add(:base, '上映中の作品は削除できません') if is_showing?
 
-    throw :abort unless errors.empty?
-  end
+  #   throw :abort unless errors.empty?
+  # end
 end
