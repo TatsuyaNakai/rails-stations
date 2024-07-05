@@ -1,0 +1,41 @@
+<h1>Sheets</h1>
+
+<div class="screen">
+  <h2 class="screen-title">スクリーン n</h2>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A</td>
+        <% @sheets.select { |sheet| sheet.row == 'a' }.each do |sheet| %>
+          <td class="highlight"></td>
+        <% end %>
+        <td>A</td>
+      </tr>
+      <tr>
+        <td>B</td>
+        <% @sheets.select { |sheet| sheet.row == 'b' }.each do |sheet| %>
+          <td class="highlight"></td>
+        <% end %>
+        <td>B</td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <% @sheets.select { |sheet| sheet.row == 'c' }.each do |sheet| %>
+          <td class="highlight"></td>
+        <% end %>
+        <td>C</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

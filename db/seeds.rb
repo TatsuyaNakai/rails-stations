@@ -13,4 +13,13 @@ Movie.create(
   ]
 )
 
+%w[a b c].each do |row|
+  rows = []
+  5.times do |n|
+    column = n + 1
+    rows << { column: column, row: row }
+  end
+  Sheet.create(rows)
+end
+
 #   Character.create(name: 'Luke', movie: movies.first)
