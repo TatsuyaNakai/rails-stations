@@ -1,42 +1,46 @@
-<%= form_with(model: movie, url: url, local: true, class: 'admin-form') do |f| %>
-  <% if movie.errors.any? %>
-    <div id="error_explanation" class="error_explanation">
-      <h2><%= movie.errors.count.to_s(:delimited) %>件のエラーがあります</h2>
+<div class="row justify-content-start">
+  <div class="col-md-6">
+    <%= form_with(model: movie, url: url, local: true, class: 'admin-form') do |f| %>
+      <% if movie.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2><%= movie.errors.count.to_s(:delimited) %>件のエラーがあります</h2>
 
-      <ul>
-        <% movie.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% movie.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="form-group">
-    <%= f.label :name, class: 'form-label' %>
-    <%= f.text_field :name, class: 'form-control', limit: 160, null: false %>
+      <div class="form-group">
+        <%= f.label :name, class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control', limit: 160, required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :year, class: 'form-label' %>
+        <%= f.text_field :year, class: 'form-control', limit: 45 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description, class: 'form-label' %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :image_url, class: 'form-label' %>
+        <%= f.text_field :image_url, class: 'form-control', limit: 150 %>
+      </div>
+
+      <div class="form-group form-check">
+        <%= f.check_box :is_showing, class: 'form-check-input', required: true %>
+        <%= f.label :is_showing, class: 'form-check-label' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="form-group">
-    <%= f.label :year, class: 'form-label' %>
-    <%= f.text_field :year, class: 'form-control', limit: 45 %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :description, class: 'form-label' %>
-    <%= f.text_area :description, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :image_url, class: 'form-label' %>
-    <%= f.text_field :image_url, class: 'form-control', limit: 150 %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :is_showing, class: 'form-label' %>
-    <%= f.check_box :is_showing, class: 'form-check-input', null: false %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit class: 'btn btn-primary' %>
-  </div>
-<% end %>
+</div>

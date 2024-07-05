@@ -1,40 +1,44 @@
-<h1>Movies</h1>
+<h1 class="text-center my-4">Movies</h1>
 
-<%= form_with url: movies_path, method: :get, local: true, id: 'filter-form' do %>
-  <div>
-    <div>
-      <%= text_field_tag :keyword, params[:keyword], placeholder: 'キーワードで検索する' %>
-    </div>
-
-    <div>
-      <%= radio_button_tag :is_showing, 'all', %w[1 2].exclude?(params[:is_showing]), id: 'all' %>
-      <%= label_tag :all, '全て' %>
-      <%= radio_button_tag :is_showing, '1', params[:is_showing] == '1', id: 'showing' %>
-      <%= label_tag :showing, '公開中' %>
-      <%= radio_button_tag :is_showing, '2', params[:is_showing] == '2', id: 'upcoming' %>
-      <%= label_tag :upcoming, '公開予定' %>
-    </div>
+<%= form_with url: movies_path, method: :get, local: true, id: 'filter-form', class: 'form-inline justify-content-center mb-4' do %>
+  <div class="form-group mx-sm-3 mb-2">
+    <%= text_field_tag :keyword, params[:keyword], placeholder: 'キーワードで検索する', class: 'form-control' %>
   </div>
 
-  <div>
-    <%= submit_tag '検索', class: 'button' %>
+  <div class="form-group mx-sm-3 mb-2">
+    <%= radio_button_tag :is_showing, 'all', %w[1 2].exclude?(params[:is_showing]), id: 'all', class: 'form-check-input' %>
+    <%= label_tag :all, '全て', class: 'form-check-label mr-2' %>
+    <%= radio_button_tag :is_showing, '1', params[:is_showing] == '1', id: 'showing', class: 'form-check-input' %>
+    <%= label_tag :showing, '公開中', class: 'form-check-label mr-2' %>
+    <%= radio_button_tag :is_showing, '2', params[:is_showing] == '2', id: 'upcoming', class: 'form-check-input' %>
+    <%= label_tag :upcoming, '公開予定', class: 'form-check-label' %>
+  </div>
+
+  <div class="form-group mx-sm-3 mb-2">
+    <%= submit_tag '検索', class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<div class="movies">
+<div class="movies container">
   <% if @movies.present? %>
-    <% @movies.each do |movie| %>
-      <div class="movie">
-        <h2><%= movie.name %></h2>
-        <% if movie.image_url.present? %>
-          <p><%= image_tag(movie.image_url, alt: movie.name) %></p>
-        <% end %>
-        <p><strong>公開年度:</strong> <%= movie.year %>年</p>
-        <p><strong>公開状態:</strong> <%= movie.is_showing ? '公開中' : '公開予定' %></p>
-        <%= link_to '詳細', movie_path(movie), class: 'button' %>
-      </div>
-    <% end %>
+    <div class="row">
+      <% @movies.each do |movie| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <% if movie.image_url.present? %>
+              <img class="card-img-top" src="<%= movie.image_url %>" alt="<%= movie.name %>">
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= movie.name %></h5>
+              <p class="card-text"><strong>公開年度:</strong> <%= movie.year %>年</p>
+              <p class="card-text"><strong>公開状態:</strong> <%= movie.is_showing ? '公開中' : '公開予定' %></p>
+              <%= link_to '詳細', movie_path(movie), class: 'btn btn-secondary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% else %>
-    <p><strong>該当する作品がありませんでした。</strong></p>
+    <p class="text-center"><strong>該当する作品がありませんでした。</strong></p>
   <% end %>
 </div>

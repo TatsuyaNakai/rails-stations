@@ -1,7 +1,9 @@
-<div class="sidebar">
-  <h2>Menu</h2>
+<div class="sidebar bg-light p-3 rounded">
+  <h2 class="h4">Menu</h2>
   <hr>
-  <ul>
-    <li><%= link_to 'Movies', admin_movies_path %></li>
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <%= link_to 'Movies', admin_movies_path, class: 'nav-link' %>
+    </li>
   </ul>
 </div>
