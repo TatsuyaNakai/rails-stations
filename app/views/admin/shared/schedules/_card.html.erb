@@ -1,0 +1,14 @@
+<div class="mb-2">
+  <%= link_to admin_schedule_path(schedule) do %>
+    <li class="list-group-item">
+      <div class="schedule-details">
+        <p>ID: <%= schedule.id %></p>
+        <p>作品ID: <%= schedule.movie_id %></p>
+        <p>開始時刻: <%= l(schedule.start_time) %></p>
+        <p>終了時刻: <%= l(schedule.end_time) %></p>
+        <p>作成日時: <%= l(schedule.created_at) %></p>
+        <p>更新日時: <%= l(schedule.updated_at) %></p>
+      </div>
+    </li>
+  <% end %>
+</div>

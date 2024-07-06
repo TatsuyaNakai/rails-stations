@@ -1,0 +1,20 @@
+<div class="movie-details">
+  <h2 class="mt-3">ID: <%= @movie.id %></h2>
+  <p><strong>タイトル:</strong> <%= @movie.name %></p>
+  <p><strong>画像URL:</strong> <%= link_to @movie.image_url, @movie.image_url %></p>
+  <p><strong>概要:</strong> <%= @movie.description%></p>
+  <p><strong>公開年:</strong> <%= @movie.year %></p>
+  <p><strong>上映中:</strong> <%= @movie.is_showing %></p>
+  <p><strong>作成日時:</strong> <%= l(@movie.created_at) %></p>
+  <p><strong>更新日時:</strong> <%= l(@movie.updated_at) %></p>
+
+  <h2 class="mt-4">上映スケジュール</h2>
+  <ul class="list-group">
+    <%= render partial: '/admin/shared/schedules/card', collection: @movie.schedules, as: :schedule %>
+  </ul>
+
+  <div class="mt-4">
+    <%= link_to '作品一覧', admin_movies_path, class: 'btn btn-secondary' %>
+    <%= link_to '上映スケジュールの作成', schedules_new_admin_movie_path, class: 'btn btn-info' %>
+  </div>
+</div>

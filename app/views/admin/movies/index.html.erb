@@ -1,50 +1,39 @@
-<h1 class="text-center my-4">Movies</h1>
+<div class="admin-content">
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>year</th>
+        <th>description</th>
+        <th>image_url</th>
+        <th>is_showing</th>
+        <th>created_at</th>
+        <th>updated_at</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
 
-<div class="admin-container container-fluid">
-  <div class="row">
-    <div class="col-md-3">
-      <%= render '/admin/shared/sidebar' %>
-    </div>
-  
-    <div class="col-md-9">
-      <div class="admin-content">
-        <table class="table table-striped table-bordered table-hover">
-          <thead class="thead-dark">
-            <tr>
-              <th>id</th>
-              <th>name</th>
-              <th>year</th>
-              <th>description</th>
-              <th>image_url</th>
-              <th>is_showing</th>
-              <th>created_at</th>
-              <th>updated_at</th>
-              <th colspan="2">Actions</th>
-            </tr>
-          </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= link_to movie.id, edit_admin_movie_path(movie) %></td>
+          <td><%= movie.name %></td>
+          <td><%= movie.year %></td>
+          <td><%= movie.description %></td>
+          <td><%= link_to movie.image_url, movie.image_url, target: '_blank' %></td>
+          <td><%= movie.is_showing ? '上映中' : '上映予定' %></td>
+          <td><%= movie.created_at %></td>
+          <td><%= movie.updated_at %></td>
+          <td><%= link_to '詳細', admin_movie_path(movie), class: 'btn btn-primary btn-sm' %></td>
+          <td><%= link_to '編集', edit_admin_movie_path(movie), class: 'btn btn-primary btn-sm' %></td>
+          <td><%= link_to '削除', admin_movie_path(movie), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-          <tbody>
-            <% @movies.each do |movie| %>
-              <tr>
-                <td><%= link_to movie.id, edit_admin_movie_path(movie) %></td>
-                <td><%= movie.name %></td>
-                <td><%= movie.year %></td>
-                <td><%= movie.description %></td>
-                <td><%= link_to movie.image_url, movie.image_url, target: '_blank' %></td>
-                <td><%= movie.is_showing ? '上映中' : '上映予定' %></td>
-                <td><%= movie.created_at %></td>
-                <td><%= movie.updated_at %></td>
-                <td><%= link_to '編集', edit_admin_movie_path(movie), class: 'btn btn-primary btn-sm' %></td>
-                <td><%= link_to '削除', admin_movie_path(movie), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'btn btn-danger btn-sm' %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-        <div class="text-center mt-4">
-          <%= link_to '新規作成', new_admin_movie_path, class: 'btn btn-success' %>
-        </div>
-      </div>
-    </div>
+  <div class="text-center mt-4">
+    <%= link_to '新規作成', new_admin_movie_path, class: 'btn btn-success' %>
   </div>
 </div>

@@ -1,59 +1,61 @@
 module Admin
-  class MoviesController < ApplicationController
-    before_action :set_movie, only: [:edit, :update, :destroy]
+  class MoviesController < AdminController
+    before_action :set_movie, only: [:show, :edit, :update, :destroy, :new_schedule]
 
-    # GET /movies or /movies.json
+    # GET /admin/movies
     def index
       @movies = Movie.all
     end
 
-    # GET /movies/new
+    # GET /admin/movies/1
+    def show; end
+
+    # GET /admin/movies/new
     def new
       @movie = Movie.new
     end
 
-    # GET /movies/1/edit
+    # GET /admin/movies/1/edit
     def edit; end
 
-    # POST /movies or /movies.json
+    # POST /admin/movies
     def create
       @movie = Movie.new(movie_params)
 
-      respond_to do |format|
-        if @movie.save
-          format.html { redirect_to admin_movies_path, notice: "Movieを新規作成しました" }
-          format.json { render :index, status: :created, location: @movie }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @movie.errors, status: :unprocessable_entity }
-        end
+      if @movie.save
+        redirect_to admin_movies_path, notice: "Movieを新規作成しました"
+      else
+        render :new, status: :unprocessable_entity
       end
     end
 
-    # PATCH/PUT /movies/1 or /movies/1.json
+    # PATCH/PUT /admin/movies/1
     def update
-      respond_to do |format|
-        if @movie.update(movie_params)
-          format.html { redirect_to admin_movies_path, notice: "Movieを更新しました" }
-          format.json { render :index, status: :ok, location: @movie }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @movie.errors, status: :unprocessable_entity }
-        end
+      if @movie.update(movie_params)
+        redirect_to admin_movies_path, notice: "Movieを更新しました"
+      else
+        render :edit, status: :unprocessable_entity
       end
     end
 
-    # DELETE /movies/1 or /movies/1.json
+    # DELETE /admin/movies/1
     def destroy
-      respond_to do |format|
-        if @movie.destroy
-          format.html { redirect_to admin_movies_url, notice: "Movieを削除しました" }
-          format.json { head :no_content }
-        else
-          format.html { redirect_to admin_movies_url, alert: @movie.errors.full_messages.join(', ') }
-          format.json { render json: @movie.errors, status: :unprocessable_entity }
-        end
+      if @movie.destroy
+        redirect_to admin_movies_url, notice: "Movieを削除しました"
+      else
+        redirect_to admin_movies_url, alert: @movie.errors.full_messages.join(', ')
       end
+    end
+
+    # GET /admin/movies/1/schedules/new
+    def new_schedule
+      @schedule = @movie.schedules.build
+    end
+
+    # GET /admin/movies/1/schedules/1
+    def show_schedule
+      movie = Movie.find(params[:movie_id])
+      @schedule = movie.schedules.find(params[:schedule_id])
     end
 
     private

@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  # GET /movies or /movies.json
+  # GET /movies
   def index
     @movies = Movie.all
 
@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
     end
   end
 
-  # GET /movies/1 or /movies/1.json
+  # GET /movies/1
   def show
     @movie = Movie.find(params[:id])
     @schedules = @movie.schedules

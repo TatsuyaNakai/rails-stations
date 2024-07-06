@@ -1,0 +1,14 @@
+<div class="admin-content">
+  <% @movies.each do |movie| %>
+    <div class="movie-schedules mb-4">
+      <h2><%= movie.name %></h2>
+      <ul class="list-group">
+        <%= render partial: '/admin/shared/schedules/card', collection: movie.schedules, as: :schedule %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="text-center mt-4">
+    <%= link_to '新規作成', new_admin_schedule_path, class: 'btn btn-success' %>
+  </div>
+</div>

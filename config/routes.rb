@@ -4,7 +4,14 @@ Rails.application.routes.draw do
   resources :sheets, only: [:index]
 
   namespace :admin do
-    resources :movies, except: [:show]
+    resources :movies do
+      # 仕様 GET /admin/movies/:id/schedules/newへのリンクを追加対応
+      get 'schedules/new', to: 'movies#new_schedule', on: :member
+
+      # クリア条件 GET /admin/movies/:movie_id/schedules/:schedule_id 対応
+      get 'schedules/:schedule_id', to: 'movies#show_schedule'
+    end
+
+    resources :schedules
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

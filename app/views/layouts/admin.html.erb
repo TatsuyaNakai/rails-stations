@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin | App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+    <% if flash.notice %>
+    <div class="alert alert-success"><%= flash.notice %></div>
+    <% end %>
+    <% if flash.alert %>
+      <div class="alert alert-danger"><%= flash.alert %></div>
+    <% end %>
+
+    <h1 class="text-center my-4">Admin</h1>
+    <div class="admin-container container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <%= render '/admin/shared/sidebar' %>
+        </div>
+          <div class="col-md-9">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
