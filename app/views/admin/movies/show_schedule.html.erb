@@ -1,0 +1,5 @@
+<h1>スケジュール</h1>
+
+<%= render '/admin/shared/schedules/form', schedule: @schedule, movies: @movies, url: admin_schedule_path(@schedule) %>
+
+<%= link_to 'Back', admin_schedules_path %>

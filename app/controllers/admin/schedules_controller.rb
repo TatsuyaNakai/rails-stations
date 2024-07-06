@@ -21,10 +21,10 @@ module Admin
 
     # POST /admin/schedules
     def create
-      @schedule = Schedule.new(schedule_params)
+      @schedule = Schedule.new(create_params)
 
       if @schedule.save
-        redirect_to admin_schedules_path, notice: "Scheduleを新規作成しました"
+        redirect_to admin_schedules_path, notice: 'スケジュールを新規作成しました'
       else
         render :new, status: :unprocessable_entity
       end
@@ -32,8 +32,8 @@ module Admin
 
     # PATCH/PUT /admin/schedules/1
     def update
-      if @schedule.update(schedule_params)
-        redirect_to admin_schedules_path, notice: "Scheduleを更新しました"
+      if @schedule.update(update_params)
+        redirect_to admin_schedules_path, notice: 'スケジュールを更新しました'
       else
         render :edit, status: :unprocessable_entity
       end
@@ -42,13 +42,14 @@ module Admin
     # DELETE /admin/schedules/1
     def destroy
       if @schedule.destroy
-        redirect_to admin_schedules_url, notice: "Scheduleを削除しました"
+        redirect_to admin_schedules_url, notice: 'スケジュールを削除しました'
       else
         redirect_to admin_schedules_url, alert: @schedule.errors.full_messages.join(', ')
       end
     end
 
     private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_movies
       @movies = Movie.all
@@ -60,8 +61,16 @@ module Admin
     end
 
     # Only allow a list of trusted parameters through.
-    def schedule_params
-      params.require(:schedule).permit(:name, :year, :description, :image_url, :is_showing)
+    def common_params
+      [:start_time, :end_time]
+    end
+
+    def create_params
+      params.require(:schedule).permit(:movie_id, *common_params)
+    end
+
+    def update_params
+      params.require(:schedule).permit(*common_params)
     end
   end
 end

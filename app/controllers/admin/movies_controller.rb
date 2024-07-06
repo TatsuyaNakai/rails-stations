@@ -1,11 +1,10 @@
 module Admin
   class MoviesController < AdminController
+    before_action :set_movies, only: [:index, :new_schedule, :show_schedule]
     before_action :set_movie, only: [:show, :edit, :update, :destroy, :new_schedule]
 
     # GET /admin/movies
-    def index
-      @movies = Movie.all
-    end
+    def index; end
 
     # GET /admin/movies/1
     def show; end
@@ -23,7 +22,7 @@ module Admin
       @movie = Movie.new(movie_params)
 
       if @movie.save
-        redirect_to admin_movies_path, notice: "Movieを新規作成しました"
+        redirect_to admin_movies_path, notice: '作品を新規作成しました'
       else
         render :new, status: :unprocessable_entity
       end
@@ -32,7 +31,7 @@ module Admin
     # PATCH/PUT /admin/movies/1
     def update
       if @movie.update(movie_params)
-        redirect_to admin_movies_path, notice: "Movieを更新しました"
+        redirect_to admin_movies_path, notice: '作品を更新しました'
       else
         render :edit, status: :unprocessable_entity
       end
@@ -41,7 +40,7 @@ module Admin
     # DELETE /admin/movies/1
     def destroy
       if @movie.destroy
-        redirect_to admin_movies_url, notice: "Movieを削除しました"
+        redirect_to admin_movies_url, notice: '作品を削除しました'
       else
         redirect_to admin_movies_url, alert: @movie.errors.full_messages.join(', ')
       end
@@ -59,6 +58,11 @@ module Admin
     end
 
     private
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_movies
+      @movies = Movie.all
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_movie

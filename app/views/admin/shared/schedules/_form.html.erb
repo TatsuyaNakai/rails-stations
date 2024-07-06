@@ -15,7 +15,7 @@
 
       <div class="form-group">
         <%= f.label :movie_id, '作品名', class: 'form-label' %>
-        <%= f.select :movie_id, movies.pluck(:name, :id), {}, include_blank: "選択してください", class: 'form-control custom-select', required: true %>
+        <%= f.select :movie_id, movies.pluck(:name, :id), {}, disabled: schedule.persisted?, include_blank: "選択してください", class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">
