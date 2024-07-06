@@ -21,7 +21,7 @@
           <td><%= movie.name %></td>
           <td><%= movie.year %></td>
           <td><%= movie.description %></td>
-          <td><%= link_to movie.image_url, movie.image_url, target: '_blank' %></td>
+          <td><%= image_tag movie.image_url, { class: 'img-fluid' } %></td>
           <td><%= movie.is_showing ? '上映中' : '上映予定' %></td>
           <td><%= movie.created_at %></td>
           <td><%= movie.updated_at %></td>
