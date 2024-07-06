@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2024_07_05_054118) do
 
   create_table "movies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 160, null: false, comment: "映画のタイトル。邦題・洋題は一旦考えなくてOK"
-    t.integer "year", comment: "公開年"
+    t.string "year", comment: "公開年"
     t.text "description", comment: "映画の説明文"
     t.string "image_url", limit: 150, comment: "映画のポスター画像が格納されているURL"
     t.boolean "is_showing", default: true, null: false, comment: "上映中かどうか"

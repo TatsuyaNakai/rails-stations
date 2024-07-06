@@ -20,23 +20,12 @@
     </div>
   </div>
 
-  <div class="dates-links my-4">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <% @dates.each do |date| %>
-        <% klass = @date == date ? 'btn-info' : 'btn-light' %>
-        <label class="btn <%= klass %>">
-          <%= link_to l(date), movie_path(id: @movie, date: date), class: 'text-dark' %>
-        </label>
-      <% end %>
-    </div>
-  </div>
-
   <div class="schedule mt-5">
     <h3>上映スケジュール</h3>
     <ul class="list-group">
-      <% @today_schedules.each do |schedule| %>
+      <% @schedules.each do |schedule| %>
         <li class="list-group-item">
-          <%= l(schedule.start_time, format: :hhmm) %>~<%= l(schedule.end_time, format: :hhmm) %>
+          <%= l(schedule.start_time) %>~<%= l(schedule.end_time) %>
         </li>
       <% end %>
     </ul>

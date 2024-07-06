@@ -28,8 +28,8 @@ class Movie < ApplicationRecord
                    length: { maximum: 160 }
 
   validates :year, allow_blank: true,
-                   numericality: { only_integer: true },
-                   inclusion: { in: 1..10_000 }
+                   length: { maximum: 255 },
+                   format: { with: /\A\d+\z/ }
 
   validates :description, allow_blank: true,
                           length: { maximum: 800 }
