@@ -29,6 +29,6 @@ class MoviesController < ApplicationController
   def reservation
     return redirect_to movies_path alert: '不正なURLです' if params[:schedule_id].blank? || params[:date].blank?
 
-    @sheets = Sheet.all
+    @sheets = Sheet.preload(:reservations)
   end
 end

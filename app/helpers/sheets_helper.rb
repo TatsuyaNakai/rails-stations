@@ -18,7 +18,8 @@ module SheetsHelper
 
   def generate_sheet_td(sheet, row, movie_id, date, schedule_id)
     content = "#{row.upcase}-#{sheet.column}"
-    if movie_id.present? && date.present? && schedule_id.present?
+    valid_url = movie_id.present? && date.present? && schedule_id.present?
+    if valid_url && !sheet.reserved?(schedule_id)
       content_tag(
         :td,
         link_to(

@@ -11,4 +11,10 @@
 class Sheet < ApplicationRecord
   # 関連
   has_many :reservations
+
+  # メソッド
+
+  def reserved?(schedule_id)
+    reservations.pluck(:schedule_id).include?(schedule_id.to_i)
+  end
 end
