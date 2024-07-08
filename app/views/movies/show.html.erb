@@ -32,7 +32,7 @@
           <%= label_tag :schedule_id, '上映時刻を選択' %>
           <%= select_tag :schedule_id, options_for_select(@schedules.map { |s| ["#{l(s.start_time, format: :yyyymmddahhmm)}~#{l(s.end_time, format: :yyyymmddahhmm)}", s.id] }), id: 'schedule-select', class: 'form-control' %>
         </div>
-        <%= submit_tag '座席を予約する', class: 'btn btn-primary' %>
+        <button type="submit" class="btn btn-primary">座席を予約する</button>
       </div>
     <% end %>
   </div>

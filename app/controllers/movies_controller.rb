@@ -27,9 +27,8 @@ class MoviesController < ApplicationController
 
   # GET movies/1/reservation
   def reservation
-    # movie = Movie.find(params[:id])
-    # @date = params[:date]
-    # @schedule_id = movie.schedules.find(params[:schedule_id]).id
+    return redirect_to movies_path alert: '不正なURLです' if params[:schedule_id].blank? || params[:date].blank?
+
     @sheets = Sheet.all
   end
 end

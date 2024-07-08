@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   resources :movies, only: [:index, :show] do
     get 'schedule', to: 'movies#schedule', on: :member
 
-    resources :reservations, only: [:new, :create]
+    resources :reservations, only: [:new]
     # /movies/:movie_id/reservation
     get 'reservation', to: 'movies#reservation', on: :member
   end
+
+  post 'reservation', to: 'reservations#create'
 
   resources :sheets, only: [:index]
 

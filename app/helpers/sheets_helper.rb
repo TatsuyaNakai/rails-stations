@@ -4,11 +4,10 @@ module SheetsHelper
     movie_id = params[:id]
     date = params[:date]
     schedule_id = params[:schedule_id]
-    valid_url = movie_id.present? && date.present? && schedule_id.present?
 
     sheets.select { |sheet| sheet.row == row }
           .sort_by { |sheet| sheet.column.to_i }
-          .map { |sheet| generate_sheet_td(sheet, row, valid_url, movie_id, date, schedule_id) }
+          .map { |sheet| generate_sheet_td(sheet, row, movie_id, date, schedule_id) }
           .join
           .html_safe
   end
@@ -17,9 +16,9 @@ module SheetsHelper
 
   private
 
-  def generate_sheet_td(sheet, row, valid_url, movie_id, date, schedule_id)
+  def generate_sheet_td(sheet, row, movie_id, date, schedule_id)
     content = "#{row.upcase}-#{sheet.column}"
-    if valid_url
+    if movie_id.present? && date.present? && schedule_id.present?
       content_tag(
         :td,
         link_to(
