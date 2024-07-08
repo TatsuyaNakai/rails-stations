@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      <%= form_with model: @reservation, url: movie_reservations_path, method: :post, local: true do |f| %>
+        <div class="card">
+          <div class="card-header text-center">
+            ご予約ページ
+          </div>
+          <div class="card-body">
+            <% if @reservation.errors.any? %>
+              <div id="error_explanation" class="alert alert-danger">
+                <h2><%= @reservation.errors.count.to_s(:delimited) %>件のエラーがあります</h2>
+
+                <ul>
+                  <% @reservation.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <%= f.hidden_field :schedule_id %>
+            <%= f.hidden_field :sheet_id %>
+            <%= f.hidden_field :date %>
+              
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">選択中の映画</label>
+              <div class="col-sm-8">
+                <p class="form-control-plaintext"><%= @movie.name %></p>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">選択中の日付</label>
+              <div class="col-sm-8">
+                <p class="form-control-plaintext"><%= f.object.date %></p>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">選択中の座席</label>
+              <div class="col-sm-8">
+                <p class="form-control-plaintext"><%= "#{@sheet.row.upcase}-#{@sheet.column}" %></p>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">選択中の上映スケジュール</label>
+              <div class="col-sm-8">
+                <p class="form-control-plaintext"><%= "#{l(@schedule.start_time, format: :yyyymmddahhmm)}~" %></p>
+                <p class="form-control-plaintext"><%= l(@schedule.end_time, format: :yyyymmddahhmm) %></p>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">氏名</label>
+              <div class="col-sm-8">
+                <%= f.text_field :name, class: "form-control", placeholder: "入力してください" %>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">メールアドレス</label>
+              <div class="col-sm-8">
+                <%= f.email_field :email, class: "form-control", placeholder: "入力してください" %>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-12 text-right">
+                <%= f.submit "座席を予約する", class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

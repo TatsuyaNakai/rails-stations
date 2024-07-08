@@ -1,0 +1,40 @@
+.screen-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.screen-title {
+  background-color: #f8f9fa;
+  padding: 10px;
+  font-size: 1.5em;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  width: 50%;
+  text-align: center;
+}
+
+.seat-table {
+  margin: auto;
+  border-collapse: separate;
+  border-spacing: 15px;
+}
+
+.seat-table th,
+.seat-table td {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+.seat-table .no-border {
+  border: none;
+}
+
+.highlight {
+  background-color: #28a745;
+  color: white;
+}

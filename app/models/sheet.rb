@@ -9,4 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Sheet < ApplicationRecord
+  # 関連
+  has_many :reservations
 end

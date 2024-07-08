@@ -10,7 +10,10 @@ import 'channels';
 import 'bootstrap';
 import 'bootstrap/scss/bootstrap.scss';
 import '../utils/flatpickr';
+import $ from 'jquery';
 
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+window.$ = $;
+window.jQuery = $;

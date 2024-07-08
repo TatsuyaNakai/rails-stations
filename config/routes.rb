@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :movies, only: [:index, :show]
+  resources :movies, only: [:index, :show] do
+    get 'schedule', to: 'movies#schedule', on: :member
+
+    resources :reservations, only: [:new, :create]
+    # /movies/:movie_id/reservation
+    get 'reservation', to: 'movies#reservation', on: :member
+  end
 
   resources :sheets, only: [:index]
 

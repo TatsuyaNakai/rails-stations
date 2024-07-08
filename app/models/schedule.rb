@@ -16,4 +16,5 @@
 class Schedule < ApplicationRecord
   # 関連
   belongs_to :movie
+  has_many :reservations
 end

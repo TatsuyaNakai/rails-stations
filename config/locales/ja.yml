@@ -3,6 +3,7 @@ ja:
     models:
       movie: 作品
       schedule: スケジュール
+      reservation: 予約
     attributes:
       movie:
         id: ID
@@ -14,17 +15,26 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
       schedule:
+        id: ID
         start_time: 開始時刻
         end_time: 終了時刻
         created_at: 登録日時
         updated_at: 更新日時
+      reservation:
+        id: ID
+        date: 日付
+        email: 予約者メールアドレス
+        name: 予約者氏名
+        created_at: 登録日時
+        updated_at: 更新日時
+
   date:
     formats:
-      default: '%Y/%m/%d(%a)'
+      default: '%Y年%m月%d日(%a)'
       yyyymm: '%Y/%m'
       yyyymmdd: '%Y/%m/%d'
   time:
     formats:
-      default: "%Y/%m/%d %H:%M:%S"
-      yyyymmddahhmm: "%Y年%m月%d日(%a) %H時%M分"
-      hhmm: "%-H:%M"
+      default: '%Y/%m/%d %H:%M:%S'
+      yyyymmddahhmm: '%Y年%m月%d日(%a) %H時%M分'
+      hhmm: '%-H:%M'
