@@ -3,8 +3,8 @@
   <p><strong>日付:</strong> <%= @reservation.date %></p>
   <p><strong>予約者メールアドレス:</strong> <%= @reservation.email %></p>
   <p><strong>予約者氏名:</strong> <%= @reservation.name%></p>
-  <p><strong>作品:</strong> <%= @reservation.schedule.movie.name %></p>
-  <p><strong>座席:</strong> <%= @reservation.sheet.position %></p>
+  <p><strong>上映スケジュールID:</strong> <%= @reservation.schedule_id %><span class="d-none">schedule_id</span></p>
+  <p><strong>座席ID:</strong> <%= @reservation.sheet_id %><span class="d-none">sheet_id</span></p>
   <p><strong>作成日時:</strong> <%= l(@reservation.created_at) %></p>
   <p><strong>更新日時:</strong> <%= l(@reservation.updated_at) %></p>
 

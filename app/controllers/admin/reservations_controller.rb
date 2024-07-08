@@ -25,7 +25,7 @@ module Admin
       if @reservation.save
         redirect_to admin_reservations_path, notice: '予約を新規作成しました'
       else
-        render :new, status: :unprocessable_entity
+        render :new, status: :bad_request
       end
     end
 
@@ -34,7 +34,7 @@ module Admin
       if @reservation.update(reservation_params)
         redirect_to admin_reservations_path, notice: '予約を更新しました'
       else
-        render :edit, status: :unprocessable_entity
+        render :edit, status: :bad_request
       end
     end
 
