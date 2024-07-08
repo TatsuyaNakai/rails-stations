@@ -1,0 +1,98 @@
+<div class="row justify-content-start">
+  <div class="col-md-6">
+    <%= form_with(model: reservation, url: url, local: true, class: 'admin-form') do |f| %>
+      <% if reservation.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2><%= reservation.errors.count.to_s(:delimited) %>件のエラーがあります</h2>
+
+          <ul>
+            <% reservation.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
+      <!-- 上映スケジュール選択時に値の割り当て -->
+      <%= f.hidden_field :date, class: 'form-control', required: true %>
+
+      <div class="form-group">
+        <%= label_tag :movie_id, '作品名', class: 'form-label' %>
+        <%= select_tag :movie_id, options_for_select(Movie.pluck(:name, :id), selected: f.object.schedule&.movie_id), include_blank: "選択してください", class: 'form-control custom-select', required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :schedule_id, '上映スケジュール', class: 'form-label' %>
+        <%= f.select :schedule_id, [], { include_blank: "選択してください" }, class: 'form-control custom-select', required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :sheet_id, '座席', class: 'form-label' %>
+        <%= f.select :sheet_id, Sheet.all.map { |s| [s.position, s.id]  }, { include_blank: "選択してください" }, class: 'form-control custom-select', required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, class: 'form-label' %>
+        <%= f.email_field :email, class: 'form-control', limit: 255 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name, class: 'form-label' %>
+        <%= f.text_field :name, class: 'form-control', limit: 50 %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('turbolinks:load', function() {
+    const schedules = <%= raw Schedule.all.map { |s| { id: s.id, movie_id: s.movie_id, date: s.start_time.to_date.to_s, run_time: "#{l(s.start_time, format: :hhmm)} ~ #{l(s.end_time, format: :hhmm)}" } }.to_json %>;
+    const movieSelect= $('#movie_id');
+    const scheduleSelect = $('#reservation_schedule_id');
+    const dateSelect =  $('#reservation_date');
+
+    const scheduleOptions = () => {
+      const selectedMovieId = movieSelect.val();
+      let options = '<option value="">選択してください</option>';
+      scheduleSelect.empty();
+      
+      if (selectedMovieId) {
+        schedules.forEach(function(schedule) {
+          if (schedule.movie_id == selectedMovieId) {
+            let selected = (schedule.id == <%= reservation.schedule_id.to_json %>) ? ' selected' : '';
+            let opt = '<option value="' + schedule.id + '"' + selected + '>' + schedule.date +' : '+ schedule.run_time + '</option>';
+
+            options += opt
+          }
+        });
+      }
+
+      scheduleSelect.append(options);
+    }
+
+    const setDateValue = () => {
+      dateSelect.val('')
+      if(scheduleSelect.val() !== '') {
+        const selectedText = scheduleSelect.find("option:selected").text()
+        const date = selectedText.split(':')[0].trim();
+
+        dateSelect.val(date)
+      };
+    }
+    
+    movieSelect.on('change', function() {
+      scheduleOptions();
+    });
+
+    scheduleSelect.on('change', function() {
+      setDateValue();
+    });
+
+    scheduleOptions();
+    setDateValue();
+  });
+</script>

@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     end
 
     resources :schedules
+    resources :reservations
   end
 end

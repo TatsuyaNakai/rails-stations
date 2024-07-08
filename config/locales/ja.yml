@@ -27,6 +27,7 @@ ja:
         name: 予約者氏名
         created_at: 登録日時
         updated_at: 更新日時
+        sheet: 予約
 
   date:
     formats:

@@ -17,4 +17,8 @@ class Sheet < ApplicationRecord
   def reserved?(schedule_id)
     reservations.pluck(:schedule_id).include?(schedule_id.to_i)
   end
+
+  def position
+    "#{row.upcase}-#{column}"
+  end
 end
