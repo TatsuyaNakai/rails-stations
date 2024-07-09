@@ -66,7 +66,7 @@ module Admin
     end
 
     def create_params
-      params.require(:schedule).permit(:movie_id, *common_params)
+      params.require(:schedule).permit(:movie_id, :screen_id, *common_params)
     end
 
     def update_params

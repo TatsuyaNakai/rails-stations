@@ -7,9 +7,19 @@
 #  row        :string(1)        not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  screen_id  :bigint           not null
+#
+# Indexes
+#
+#  index_sheets_on_screen_id  (screen_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (screen_id => screens.id)
 #
 class Sheet < ApplicationRecord
   # 関連
+  belongs_to :screen
   has_many :reservations
 
   # メソッド

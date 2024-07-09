@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_06_083944) do
+ActiveRecord::Schema.define(version: 2024_07_09_035824) do
 
   create_table "movies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 160, null: false, comment: "映画のタイトル。邦題・洋題は一旦考えなくてOK"
@@ -42,7 +42,14 @@ ActiveRecord::Schema.define(version: 2024_07_06_083944) do
     t.datetime "end_time", null: false, comment: "上映終了時刻"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "screen_id", null: false
     t.index ["movie_id"], name: "index_schedules_on_movie_id"
+    t.index ["screen_id"], name: "index_schedules_on_screen_id"
+  end
+
+  create_table "screens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sheets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -50,6 +57,10 @@ ActiveRecord::Schema.define(version: 2024_07_06_083944) do
     t.string "row", limit: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "screen_id", null: false
+    t.index ["screen_id"], name: "index_sheets_on_screen_id"
   end
 
+  add_foreign_key "schedules", "screens"
+  add_foreign_key "sheets", "screens"
 end
