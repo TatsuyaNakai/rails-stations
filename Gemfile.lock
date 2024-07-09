@@ -67,6 +67,13 @@ GEM
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
     bcrypt (3.1.20)
+    better_html (2.0.2)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
+      ast (~> 2.0)
+      erubi (~> 1.4)
+      parser (>= 2.4)
+      smart_properties
     bindex (0.8.1)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
@@ -95,6 +102,13 @@ GEM
     devise-i18n (1.12.1)
       devise (>= 4.9.0)
     diff-lcs (1.4.4)
+    erb_lint (0.5.0)
+      activesupport
+      better_html (>= 2.0.1)
+      parser (>= 2.7.1.4)
+      rainbow
+      rubocop
+      smart_properties
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -243,6 +257,7 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    smart_properties (1.17.0)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -295,6 +310,7 @@ DEPENDENCIES
   capybara
   devise
   devise-i18n
+  erb_lint
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.3)

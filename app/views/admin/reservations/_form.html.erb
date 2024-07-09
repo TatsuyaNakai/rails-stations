@@ -12,7 +12,7 @@
           </ul>
         </div>
       <% end %>
-      
+
       <!-- 上映スケジュール選択時に値の割り当て -->
       <%= f.hidden_field :date, class: 'form-control', required: true %>
 
@@ -28,7 +28,7 @@
 
       <div class="form-group">
         <%= f.label :sheet_id, '座席', class: 'form-label' %>
-        <%= f.select :sheet_id, Sheet.all.map { |s| [s.position, s.id]  }, { include_blank: "選択してください" }, class: 'form-control custom-select', required: true %>
+        <%= f.select :sheet_id, Sheet.all.map { |s| [s.position, s.id] }, { include_blank: "選択してください" }, class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">
@@ -59,7 +59,7 @@
       const selectedMovieId = movieSelect.val();
       let options = '<option value="">選択してください</option>';
       scheduleSelect.empty();
-      
+
       if (selectedMovieId) {
         schedules.forEach(function(schedule) {
           if (schedule.movie_id == selectedMovieId) {
@@ -83,7 +83,7 @@
         dateSelect.val(date)
       };
     }
-    
+
     movieSelect.on('change', function() {
       scheduleOptions();
     });

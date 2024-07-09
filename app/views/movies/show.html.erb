@@ -5,7 +5,7 @@
         <%= image_tag(@movie.image_url, class: 'img-fluid rounded') if @movie.image_url.present? %>
       </div>
     </div>
-    
+
     <div class="col-md-8">
       <div class="movie-info">
         <p class="status">
@@ -68,7 +68,7 @@
       const filteredSchedules = schedules.filter(function(s) {
         const dateObj = new Date(s.start_time)
         const { year, month, day } = parseDate(dateObj)
-        
+
         const formatDate = `${year}-${month}-${day}`
         return formatDate === selectedDate;
       });
