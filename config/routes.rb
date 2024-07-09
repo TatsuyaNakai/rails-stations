@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # root 'movies#index'
+
+  devise_for :users, controllers: { registrations: 'users/registrations' }
+
   resources :movies, only: [:index, :show] do
     get 'schedule', to: 'movies#schedule', on: :member
 

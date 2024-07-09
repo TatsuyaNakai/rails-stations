@@ -1,0 +1,10 @@
+<% if resource.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h2><%= resource.errors.count.to_s(:delimited) %>件のエラーがあります</h2>
+    <ul>
+      <% resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

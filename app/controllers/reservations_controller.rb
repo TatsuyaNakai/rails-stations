@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
+
   # GET /movies/1/reservations/new
   def new
     return redirect_to movies_path, alert: '不正なURLです' if params[:date].blank? || params[:sheet_id].blank?
@@ -10,7 +12,7 @@ class ReservationsController < ApplicationController
   # POST /reservations
   def create
     set_related_records(params[:reservation][:schedule_id], params[:reservation][:sheet_id])
-    @reservation = @schedule.reservations.build(reservation_params)
+    @reservation = current_user.reservations.build(reservation_params)
 
     if @reservation.save
       redirect_to movies_path(@movie), notice: '予約が完了しました'

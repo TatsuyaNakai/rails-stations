@@ -4,6 +4,7 @@ ja:
       movie: 作品
       schedule: スケジュール
       reservation: 予約
+      user: 会員
     attributes:
       movie:
         id: ID
@@ -24,11 +25,15 @@ ja:
       reservation:
         id: ID
         date: 日付
-        email: 予約者メールアドレス
-        name: 予約者氏名
         created_at: 登録日時
         updated_at: 更新日時
         sheet: 予約
+      user:
+        email: メールアドレス
+        name: 氏名
+        password: パスワード
+        created_at: 登録日時
+        updated_at: 更新日時
 
   date:
     formats:
