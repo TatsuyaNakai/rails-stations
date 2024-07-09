@@ -58,7 +58,11 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
+
   gem 'erb_lint', require: false
+
+  # Can be generated erd see: https://zenn.dev/koedame/articles/ac4815887325ef
+  gem 'rails-mermaid_erd'
 end
 
 group :test do

@@ -4,7 +4,9 @@ ja:
       movie: 作品
       schedule: スケジュール
       reservation: 予約
+      screen: スクリーン
       user: 会員
+      theater: 劇場
     attributes:
       movie:
         id: ID
@@ -28,10 +30,20 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
         sheet: 予約
+      screen:
+        id: ID
+        number: スクリーン番号
+        created_at: 登録日時
+        updated_at: 更新日時
+        theater: 劇場
       user:
         email: メールアドレス
         name: 氏名
         password: パスワード
+        created_at: 登録日時
+        updated_at: 更新日時
+      theater:
+        id: ID
         created_at: 登録日時
         updated_at: 更新日時
 

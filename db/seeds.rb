@@ -4,8 +4,10 @@
 # Examples:
 #
 
-screens = Screen.create([{}, {}, {}])
+theaters = Theater.create([{}, {}])
+theaters.each { |theater| theater.screens.create([{ number: 1 }, { number: 2 }, { number: 3 }]) }
 
+screens = Screen.all
 screens.each do |screen|
   %w[a b c].each do |row|
     rows = []
