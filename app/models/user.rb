@@ -31,6 +31,4 @@ class User < ApplicationRecord
 
   validates :name, presence: true,
                    length: { maximum: 50 }
-
-  validates :password_confirmation, presence: true, on: :create # Station14用
 end

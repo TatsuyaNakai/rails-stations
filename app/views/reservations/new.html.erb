@@ -38,7 +38,14 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-sm-4 col-form-label">シアター番号</label>
+              <label class="col-sm-4 col-form-label">劇場番号</label>
+              <div class="col-sm-8">
+                <p class="form-control-plaintext"><%= @sheet.screen.theater_id %></p>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">スクリーン番号</label>
               <div class="col-sm-8">
                 <p class="form-control-plaintext"><%= @sheet.screen_id %></p>
               </div>

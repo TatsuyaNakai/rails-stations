@@ -23,7 +23,16 @@ class Screen < ApplicationRecord
   has_many :sheets, dependent: :destroy
   has_many :schedules
 
+  # フック
+  before_validation :set_max_number, if: :new_record?, unless: :number?
+
   # バリデーション
   validates :number, numericality: { only_integer: true },
                      uniqueness: { scope: :theater }
+
+  # メソッド(Private)
+
+  def set_max_number
+    self.number = theater.screens.maximum(:number).to_i + 1
+  end
 end
