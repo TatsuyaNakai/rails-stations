@@ -5,7 +5,7 @@
 #
 
 theaters = Theater.create([{}, {}])
-theaters.each { |theater| theater.screens.create([{ number: 1 }, { number: 2 }, { number: 3 }]) }
+theaters.each { |theater| theater.screens.create([{}, {}, {}]) }
 
 screens = Screen.all
 screens.each do |screen|
@@ -37,20 +37,16 @@ def movie_schedules(date)
       end_time: Time.new(date.year, date.month, date.day, 9, 30, 0)
     }, {
       movie_id: movie_id,
-      start_time: Time.new(date.year, date.month, date.day, 12, 30, 0),
-      end_time: Time.new(date.year, date.month, date.day, 15, 0, 0)
-    }, {
-      movie_id: movie_id,
       start_time: Time.new(date.year, date.month, date.day, 17, 0, 0),
       end_time: Time.new(date.year, date.month, date.day, 18, 30, 0)
     }
   ]
 end
 
-dates = (-3..3).map { |i| Date.today + i }
+dates = (0..6).map { |i| Date.today + i }
 
 screens.each do |screen|
   screen.schedules.create(dates.map { |date| movie_schedules(date) }.flatten)
 end
 
-#   Character.create(name: 'Luke', movie: movies.first)
+User.create!(name: 'User1', email: 'test@gmail.com', password: 'password')
