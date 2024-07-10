@@ -1,0 +1,11 @@
+<%= @user.name %> 様
+
+この度はご予約いただきありがとうございます。
+ご予約いただいた内容の詳細をご確認ください。
+
+劇場番号: <%= @screen.theater_id %>
+作品名: <%= @schedule.movie.name %>
+開始時刻: <%= l(@schedule.start_time, format: :yyyymmddahhmm) %>
+終了時刻: <%= l(@schedule.end_time, format: :yyyymmddahhmm) %>
+
+当日はお待ちしております。

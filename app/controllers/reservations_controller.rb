@@ -15,6 +15,7 @@ class ReservationsController < ApplicationController
     @reservation = current_user.reservations.build(reservation_params)
 
     if @reservation.save
+      ReservationMailer.confirm_email(@reservation).deliver_now
       redirect_to movies_path(@movie), notice: '予約が完了しました'
     elsif reserved_sheet?
       redirect_to(
@@ -35,7 +36,7 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:schedule_id, :sheet_id, :date, :email, :name)
+    params.require(:reservation).permit(:schedule_id, :sheet_id, :date)
   end
 
   def reserved_sheet?
