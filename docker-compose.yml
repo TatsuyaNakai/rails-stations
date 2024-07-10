@@ -20,6 +20,8 @@ services:
       context: .
       dockerfile: ./infra/web/Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      TZ: Asia/Tokyo
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
@@ -29,6 +31,19 @@ services:
       - db
     stdin_open: true
     tty: true
+
+  cron:
+    build:
+      context: .
+      dockerfile: ./infra/web/Dockerfile
+    volumes:
+      - .:/app
+    environment:
+      TZ: Asia/Tokyo
+      CRON_MODE: 'true'
+    depends_on:
+      - web
+      - db
 
   webpacker:
     build:

@@ -1,0 +1,14 @@
+<%= @user.name %> 様
+
+この度はご予約いただきありがとうございました。
+ご予約いただいた日程が明日となりましたので改めてご連絡させていただいております。
+<% @reservations.each_with_index do |reservation, index| %>
+
+<%= index + 1 %>件目
+劇場番号: <%= reservation.schedule.screen.theater_id %>
+作品名: <%= reservation.schedule.movie.name %>
+開始時刻: <%= l(reservation.schedule.start_time, format: :yyyymmddahhmm) %>
+終了時刻: <%= l(reservation.schedule.end_time, format: :yyyymmddahhmm) %>
+<% end %>
+
+明日はお待ちしております。
