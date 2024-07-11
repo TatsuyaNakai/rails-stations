@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @dates = (0..6).map { |i| [l(today + i), (today + i).to_s] }
 
-    @schedules = @movie.schedules
+    @schedules = @movie.schedules.includes(:screen)
     @schedules = @schedules.where(screen_id: theater.screens.ids) if theater
   end
 

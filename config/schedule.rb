@@ -17,6 +17,10 @@ every 1.day, at: '7:00 pm' do
   rake 'user:remind_reservations'
 end
 
+every 1.day, at: '12:00 am' do
+  runner "Ranking.insert_daily_rankings!"
+end
+
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"

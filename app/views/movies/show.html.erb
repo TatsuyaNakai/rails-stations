@@ -47,7 +47,7 @@
       <div id="schedule-container">
         <div class="form-group">
           <%= label_tag :schedule_id, '上映時刻を選択' %>
-          <% options = options_for_select(@schedules.map { |s| ["#{l(s.start_time, format: :yyyymmddahhmm)}~#{l(s.end_time, format: :yyyymmddahhmm)}", s.id] }) %>
+          <% options = options_for_select(@schedules.map { |s| ["【#{s.screen.number}番スクリーン】#{l(s.start_time, format: :yyyymmddahhmm)}~#{l(s.end_time, format: :yyyymmddahhmm)}", s.id] }) %>
           <%= select_tag :schedule_id, options, include_blank: '選択してください', id: 'schedule-select', class: 'form-control' %>
         </div>
         <button type="submit" class="btn btn-primary">座席を予約する</button>
@@ -61,22 +61,21 @@
 </div>
 
 <script>
-  const parseDate = (dateObj) => {
-    const week = ['日', '月', '火', '水', '木', '金', '土'];
-
-    const year = dateObj.getFullYear();
-    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-    const day = String(dateObj.getDate()).padStart(2, '0');
-    const date = week[dateObj.getDay()];
-    const hours = String(dateObj.getHours()).padStart(2, '0');
-    const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-
-    return { year, month, day, date, hours, minutes }
-  }
-
   document.addEventListener('turbolinks:load', function() {
+    const parseDate = (dateObj) => {
+      const week = ['日', '月', '火', '水', '木', '金', '土'];
+
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      const date = week[dateObj.getDay()];
+      const hours = String(dateObj.getHours()).padStart(2, '0');
+      const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+
+      return { year, month, day, date, hours, minutes }
+    }
     // スケジュールデータをJavaScriptの変数に埋め込む
-    const schedules = <%= @schedules.to_json.html_safe %>;
+    const schedules = <%= @schedules.to_json(include: { screen: { only: [:number] } }).html_safe %>;
     const scheduleSelect = $('#schedule-select');
 
     $('#date-select').on('change', function() {
@@ -97,11 +96,11 @@
         const startDateObj = new Date(s.start_time)
         const endDateObj = new Date(s.end_time)
         const formatDate = (dateObj) => {
-          const { year, month, day, date, hours , minutes } = parseDate(startDateObj)
+          const { year, month, day, date, hours , minutes } = parseDate(dateObj)
           return `${year}年${month}月${day}日(${date})${hours}時${minutes}分`;
         }
 
-        scheduleSelect.append(new Option(`${formatDate(startDateObj)} ~ ${formatDate(endDateObj)}`, s.id));
+        scheduleSelect.append(new Option(`【${s.screen.number}番スクリーン】 ${formatDate(startDateObj)} ~ ${formatDate(endDateObj)}`, s.id));
       });
     });
   });

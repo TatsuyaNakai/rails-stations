@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReservationsController, type: :controller do
   let(:user) { create(:user) }
-  let(:screen) { FactoryBot.create(:screen) }
+  let(:screen) { create(:screen) }
   let(:movie) { create(:movie) }
   let(:schedule) do
     Schedule.create(

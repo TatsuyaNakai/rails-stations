@@ -17,7 +17,9 @@
 #
 class Movie < ApplicationRecord
   # 関連
+  has_many :rankings, dependent: :destroy
   has_many :schedules, dependent: :destroy
+  has_many :reservations, through: :schedules
 
   # フック
   # before_destroy :check_is_showing_false
@@ -30,9 +32,6 @@ class Movie < ApplicationRecord
   validates :year, allow_blank: true,
                    length: { maximum: 255 },
                    format: { with: /\A\d+\z/ }
-
-  validates :description, allow_blank: true,
-                          length: { maximum: 800 }
 
   validates :description, allow_nil: true,
                           length: { maximum: 150 }
