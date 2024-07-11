@@ -32,4 +32,4 @@ jobs:
 
       # テーブル変更などが実施されており、既存のソースコードはテストが通らなくなっているため、対象外とした
       - name: Run Tests
-        run: bundle exec rspec ./spec/beginner/station06
+        run: bundle exec rspec spec/beginner/station06
