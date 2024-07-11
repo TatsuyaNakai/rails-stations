@@ -1,0 +1,39 @@
+name: RSpec
+
+on: [push]
+
+jobs:
+  rspec:
+    name: Run RSpec
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true
+
+      - name: Cache bundle
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundle-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundle-
+
+      - name: DB prepare
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bin/rails db:prepare
+
+      - name: Run Tests
+        run: bundle exec rspec

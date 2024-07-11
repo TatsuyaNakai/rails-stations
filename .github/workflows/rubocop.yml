@@ -1,0 +1,29 @@
+name: Rubocop
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundle-cache: true
+
+      - name: Cache bundle
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundle-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundle-
+
+      - name: Install dependencies(Bundler)
+        run: bundle install --path vendor/bundle
+
+      - name: Run Rubocop
+        run: bundle exec rubocop
