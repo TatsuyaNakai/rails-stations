@@ -37,9 +37,3 @@ yarn-debug.log*
 
 # For techtrain clie
 .techtrain/config.toml
-
-# カスタマイズした部分
-.rubocop.yml
-.rubocop_todo.yml
-makefile
-lib/tasks/db.rake

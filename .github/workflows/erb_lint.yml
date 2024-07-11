@@ -14,14 +14,6 @@ jobs:
         with:
           bundle-cache: true
 
-      - name: Cache bundle
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-bundle-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bundle-
-
       - name: Install dependencies(Bundler)
         run: bundle install --path vendor/bundle
 
