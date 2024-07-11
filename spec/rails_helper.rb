@@ -4,7 +4,7 @@ require 'rake_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -73,7 +73,6 @@ RSpec.configure do |config|
 
   # When using the methods of Factory_bot in the spec test code, the class name can be omitted.
   config.include FactoryBot::Syntax::Methods
-
 
   # for N+1 test
   if Bullet.enable?

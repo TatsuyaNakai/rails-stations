@@ -10,7 +10,7 @@
 
       <div class="form-group">
         <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control', autocomplete: "current-password" %>
+        <%= f.password_field :password, class: 'form-control', autocomplete: 'current-password' %>
       </div>
 
       <div class="form-group form-check">
@@ -19,10 +19,10 @@
       </div>
 
       <div class="form-group">
-        <%= f.submit "ログイン", class: 'btn btn-primary' %>
+        <%= f.submit 'ログイン', class: 'btn btn-primary' %>
       </div>
     <% end %>
 
-    <%= render "users/shared/links" %>
+    <%= render 'users/shared/links' %>
   </div>
 </div>

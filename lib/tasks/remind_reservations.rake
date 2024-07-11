@@ -1,6 +1,6 @@
 namespace :user do
   task remind_reservations: :environment do
-    reservations = Reservation.includes(schedule: [:screen, :movie]).where(date: Date.tomorrow)
+    reservations = Reservation.includes(schedule: %i[screen movie]).where(date: Date.tomorrow)
     mail_list = reservations.each_with_object([]) do |reservation, ary|
       index = ary.find_index { |elm| elm[:user_id] == reservation.user_id }
       if index

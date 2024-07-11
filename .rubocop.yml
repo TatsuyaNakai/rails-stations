@@ -10,6 +10,13 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - lib/tasks/auto_annotate_models.rake
+    # 以下、pull時のソースコード維持のため、Rubocop対象外とする
+    - 'bin/**/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/station[0-9][0-9]/*'
+    - 'spec/factories/*'
+    - 'test/**/*'
+    - 'config/environments/production.rb'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -49,3 +56,6 @@ Metrics/AbcSize:
 
 Lint/MissingSuper:
   Enabled: false
+
+Layout/LineLength:
+  Max: 250

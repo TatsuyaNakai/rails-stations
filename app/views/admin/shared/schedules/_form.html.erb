@@ -15,17 +15,17 @@
 
       <div class="form-group">
         <%= label_tag :theater_id, 'シアター番号', class: 'form-label' %>
-        <%= select_tag :theater_id, options_for_select(Theater.pluck(:id, :id)), disabled: schedule.persisted?, include_blank: "選択してください", id: 'theater-select', class: 'form-control custom-select', required: true %>
+        <%= select_tag :theater_id, options_for_select(Theater.pluck(:id, :id)), disabled: schedule.persisted?, include_blank: '選択してください', id: 'theater-select', class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :screen_id, 'スクリーン番号', class: 'form-label' %>
-        <%= f.select :screen_id, Screen.pluck(:number, :id), { include_blank: "選択してください" }, disabled: schedule.persisted?, class: 'form-control custom-select', required: true %>
+        <%= f.select :screen_id, Screen.pluck(:number, :id), { include_blank: '選択してください' }, disabled: schedule.persisted?, class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :movie_id, '作品名', class: 'form-label' %>
-        <%= f.select :movie_id, Movie.pluck(:name, :id), { include_blank: "選択してください" }, disabled: schedule.persisted?, class: 'form-control custom-select', required: true %>
+        <%= f.select :movie_id, Movie.pluck(:name, :id), { include_blank: '選択してください' }, disabled: schedule.persisted?, class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">

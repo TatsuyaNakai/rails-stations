@@ -3,7 +3,7 @@
     <h2>新規会員登録</h2>
 
     <%= form_with model: resource, url: user_registration_path, local: true do |f| %>
-      <%= render "users/shared/error_messages", resource: resource %>
+      <%= render 'users/shared/error_messages', resource: resource %>
 
       <div class="form-group">
         <%= f.label :name %>
@@ -17,19 +17,19 @@
 
       <div class="form-group">
         <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control', autocomplete: "new-password" %>
+        <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password' %>
       </div>
 
       <div class="form-group">
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'new-password' %>
       </div>
 
       <div class="form-group">
-        <%= f.submit "会員登録", class: 'btn btn-primary' %>
+        <%= f.submit '会員登録', class: 'btn btn-primary' %>
       </div>
     <% end %>
 
-    <%= render "users/shared/links" %>
+    <%= render 'users/shared/links' %>
   </div>
 </div>

@@ -18,17 +18,17 @@
 
       <div class="form-group">
         <%= label_tag :movie_id, '作品名', class: 'form-label' %>
-        <%= select_tag :movie_id, options_for_select(Movie.pluck(:name, :id), selected: f.object.schedule&.movie_id), include_blank: "選択してください", class: 'form-control custom-select', required: true %>
+        <%= select_tag :movie_id, options_for_select(Movie.pluck(:name, :id), selected: f.object.schedule&.movie_id), include_blank: '選択してください', class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :schedule_id, '上映スケジュール', class: 'form-label' %>
-        <%= f.select :schedule_id, [], { include_blank: "選択してください" }, class: 'form-control custom-select', required: true %>
+        <%= f.select :schedule_id, [], { include_blank: '選択してください' }, class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">
         <%= f.label :sheet_id, '座席', class: 'form-label' %>
-        <%= f.select :sheet_id, Sheet.all.map { |s| [s.position, s.id] }, { include_blank: "選択してください" }, class: 'form-control custom-select', required: true %>
+        <%= f.select :sheet_id, Sheet.all.map { |s| [s.position, s.id] }, { include_blank: '選択してください' }, class: 'form-control custom-select', required: true %>
       </div>
 
       <div class="form-group">

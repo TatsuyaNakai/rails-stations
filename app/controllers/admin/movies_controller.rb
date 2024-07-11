@@ -1,7 +1,7 @@
 module Admin
   class MoviesController < AdminController
-    before_action :set_movies, only: [:index, :new_schedule, :show_schedule]
-    before_action :set_movie, only: [:show, :edit, :update, :destroy, :new_schedule]
+    before_action :set_movies, only: %i[index new_schedule show_schedule]
+    before_action :set_movie, only: %i[show edit update destroy new_schedule]
 
     # GET /admin/movies
     def index; end

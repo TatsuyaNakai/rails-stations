@@ -1,6 +1,6 @@
 module Admin
   class ReservationsController < AdminController
-    before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+    before_action :set_reservation, only: %i[show edit update destroy]
 
     # GET /admin/reservations
     def index

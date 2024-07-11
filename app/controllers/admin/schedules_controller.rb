@@ -1,7 +1,7 @@
 module Admin
   class SchedulesController < AdminController
-    before_action :set_movies, only: [:new, :edit]
-    before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+    before_action :set_movies, only: %i[new edit]
+    before_action :set_schedule, only: %i[show edit update destroy]
 
     # GET /admin/schedules
     def index
@@ -62,7 +62,7 @@ module Admin
 
     # Only allow a list of trusted parameters through.
     def common_params
-      [:start_time, :end_time]
+      %i[start_time end_time]
     end
 
     def create_params

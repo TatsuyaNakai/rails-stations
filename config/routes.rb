@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  resources :movies, only: [:index, :show] do
+  resources :movies, only: %i[index show] do
     get 'schedule', to: 'movies#schedule', on: :member
 
     resources :reservations, only: [:new]
@@ -28,5 +28,5 @@ Rails.application.routes.draw do
     resources :reservations
   end
 
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
