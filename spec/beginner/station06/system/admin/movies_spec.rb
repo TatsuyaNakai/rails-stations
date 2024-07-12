@@ -50,4 +50,24 @@ RSpec.describe 'Admin::Movies', type: :system do
       expect(page.html).to have_selector('form')
     end
   end
+
+  describe 'GET /admin/movies/:id/edit' do
+    let!(:movie) { FactoryBot.create(:movie) }
+
+    it 'は、formタグが存在すること' do
+      visit edit_admin_movie_path(movie)
+
+      expect(page.html).to have_selector('form')
+    end
+
+    it 'は、フォームに予め値が入っていること' do
+      visit edit_admin_movie_path(movie)
+
+      expect(find_field('movie[name]').value).to eq(movie.name)
+      expect(find_field('movie[year]').value).to eq(movie.year)
+      expect(find_field('movie[description]').value).to eq(movie.description)
+      expect(find_field('movie[image_url]').value).to eq(movie.image_url)
+      expect(find_field('movie[is_showing]').value == '1').to eq(movie.is_showing)
+    end
+  end
 end

@@ -60,4 +60,48 @@ RSpec.describe Admin::MoviesController, type: :controller do
       end
     end
   end
+
+  describe 'GET /admin/movies/:id/edit' do
+    let!(:movie) { FactoryBot.create(:movie) }
+
+    it 'は、正常にレスポンスを返すこと' do
+      get :edit, params: { id: movie.id }
+      expect(response).to be_successful
+    end
+
+    it 'は、HTMLのレスポンスを返すこと' do
+      get :edit, params: { id: movie.id }
+      expect(response.content_type).to include('text/html')
+    end
+  end
+
+  describe 'GET /admin/movies/:id/' do
+    let!(:movie) { FactoryBot.create(:movie) }
+
+    context '正しいパラメータのとき' do
+      it 'は、作品の更新ができること' do
+        movie_params = FactoryBot.attributes_for(:movie)
+        patch :update, params: { id: movie.id, movie: movie_params }
+
+        expect(movie.reload.name).to eq(movie_params[:name])
+      end
+    end
+
+    context '不正なパラメータのとき' do
+      before do
+        other_movie = FactoryBot.create(:movie)
+        movie_params = FactoryBot.attributes_for(:movie, name: other_movie.name)
+
+        patch :update, params: { id: movie.id, movie: movie_params }
+      end
+
+      it 'は、422を返却すること' do
+        expect(response).to have_http_status '422'
+      end
+
+      it 'は、新規作成画面を表示すること' do
+        expect(response).to render_template(:edit)
+      end
+    end
+  end
 end
