@@ -36,4 +36,21 @@ RSpec.describe MoviesController, type: :controller do
       end
     end
   end
+
+  describe 'GET /movies/:id' do
+    let!(:movie) { FactoryBot.create(:movie) }
+
+    it 'は、詳細情報が取得できること' do
+      get :show, params: { id: movie.id }
+
+      expect(assigns(:movie)).to match(movie)
+    end
+
+    it 'は、作品に関連するスケジュールが全件取得できること' do
+      FactoryBot.create_list(:schedule, 3, movie: movie)
+
+      get :show, params: { id: movie.id }
+      expect(assigns(:schedules)).to match_array(movie.schedules)
+    end
+  end
 end

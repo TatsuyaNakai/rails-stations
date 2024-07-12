@@ -75,16 +75,16 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   # for N+1 test
-  if Bullet.enable?
-    config.before(:each) do
-      Bullet.start_request
-    end
+  # if Bullet.enable?
+  #   config.before(:each) do
+  #     Bullet.start_request
+  #   end
 
-    config.after(:each) do
-      Bullet.perform_out_of_channel_notifications if Bullet.notification?
-      Bullet.end_request
-    end
-  end
+  #   config.after(:each) do
+  #     Bullet.perform_out_of_channel_notifications if Bullet.notification?
+  #     Bullet.end_request
+  #   end
+  # end
 
   # Include Devise test helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
