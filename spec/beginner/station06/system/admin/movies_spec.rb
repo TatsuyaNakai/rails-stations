@@ -81,7 +81,7 @@ RSpec.describe 'Admin::Movies', type: :system do
       visit admin_movie_path(@movie)
 
       @movie.schedules.each do |schedule|
-        within('.schedule-details', text: schedule.id.to_s) do
+        within("li[data-id='#{schedule.id}'] .schedule-details") do
           expect(page).to have_content(schedule.id)
         end
       end

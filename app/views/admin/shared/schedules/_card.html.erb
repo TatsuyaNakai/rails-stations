@@ -1,6 +1,6 @@
 <div class="mb-2">
   <%= link_to admin_schedule_path(schedule) do %>
-    <li class="list-group-item">
+    <li class="list-group-item" data-id="<%= schedule.id %>">
       <div class="schedule-details">
         <p>ID: <%= schedule.id %></p>
         <p>作品ID: <%= schedule.movie_id %></p>
