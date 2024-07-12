@@ -1,8 +1,8 @@
 require 'rails_helper'
-require_relative '../custom_helper'
+require_relative '../../custom_helper'
 
-RSpec.describe MoviesController, type: :controller do
-  describe 'GET /movies' do
+RSpec.describe Admin::MoviesController, type: :controller do
+  describe 'GET /admin/movies' do
     before do
       @movie1 = FactoryBot.create(:movie)
       @movie2 = FactoryBot.create(:movie)
