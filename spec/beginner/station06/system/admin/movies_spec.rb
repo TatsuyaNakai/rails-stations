@@ -70,4 +70,21 @@ RSpec.describe 'Admin::Movies', type: :system do
       expect(find_field('movie[is_showing]').value == '1').to eq(movie.is_showing)
     end
   end
+
+  describe 'GET /admin/movies/:id' do
+    before do
+      @movie = FactoryBot.create(:movie)
+      FactoryBot.create_list(:schedule, 3, movie: @movie)
+    end
+
+    it 'は、関連するスケジュールを表示していること' do
+      visit admin_movie_path(@movie)
+
+      @movie.schedules.each do |schedule|
+        within('.schedule-details', text: schedule.id.to_s) do
+          expect(page).to have_content(schedule.id)
+        end
+      end
+    end
+  end
 end

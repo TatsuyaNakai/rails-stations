@@ -75,7 +75,7 @@ RSpec.describe Admin::MoviesController, type: :controller do
     end
   end
 
-  describe 'GET /admin/movies/:id/' do
+  describe 'PATCH /admin/movies/:id/' do
     let!(:movie) { FactoryBot.create(:movie) }
 
     context '正しいパラメータのとき' do
