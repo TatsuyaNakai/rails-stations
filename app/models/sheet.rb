@@ -22,6 +22,20 @@ class Sheet < ApplicationRecord
   belongs_to :screen
   has_many :reservations
 
+  # クラスメソッド
+  def self.create_sheets_for_screen!(screen)
+    return if screen.sheets.present?
+
+    %w[a b c].each do |row|
+      rows = []
+      5.times do |n|
+        column = n + 1
+        rows << { column: column, row: row }
+      end
+      screen.sheets.create!(rows)
+    end
+  end
+
   # メソッド
 
   def reserved?(schedule_id)

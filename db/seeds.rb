@@ -8,16 +8,7 @@ theaters = Theater.create([{}, {}])
 theaters.each { |theater| theater.screens.create([{}]) }
 
 screens = Screen.all
-screens.each do |screen|
-  %w[a b c].each do |row|
-    rows = []
-    5.times do |n|
-      column = n + 1
-      rows << { column: column, row: row }
-    end
-    screen.sheets.create(rows)
-  end
-end
+screens.each { |screen| Sheet.create_sheets_for_screen!(screen) }
 
 image_url = 'https://picsum.photos/300/440'
 Movie.create(
