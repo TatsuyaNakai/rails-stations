@@ -22,6 +22,9 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Set up JavaScript package
+        run: yarn install --check-files
+
       - name: Set up database configuration
         run: cp config/database.yml.ci config/database.yml
 
