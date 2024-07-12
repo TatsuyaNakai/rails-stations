@@ -104,4 +104,19 @@ RSpec.describe Admin::MoviesController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE /admin/movies/:id/' do
+    context 'データが存在するとき' do
+      let!(:movie) { FactoryBot.create(:movie) }
+      it 'は、対象のレコードが削除されること' do
+        expect { delete :destroy, params: { id: movie.id } }.to change(Movie, :count).by(-1)
+      end
+    end
+
+    context 'データが存在しないとき' do
+      it 'は、400を返すこと' do
+        expect { delete :destroy, params: { id: 100 } }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end

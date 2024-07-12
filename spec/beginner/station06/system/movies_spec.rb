@@ -21,5 +21,10 @@ RSpec.describe 'Movies', type: :system do
         expect(img[:src]).to eq(movie2.image_url)
       end
     end
+
+    it 'は、method=get のformタグが存在すること' do
+      visit movies_path
+      expect(page).to have_selector('form[method="get"]')
+    end
   end
 end
