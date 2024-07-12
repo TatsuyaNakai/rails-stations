@@ -22,7 +22,12 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Set up JavaScript package
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies(Yarn)
         run: yarn install --check-files
 
       - name: Set up database configuration
@@ -32,6 +37,9 @@ jobs:
         run: |
           bundle exec rails db:create
           bundle exec rails db:migrate
+
+      - name: Build assets
+        run: bundle exec rails webpacker:compile
 
       # テーブル変更などが実施されており、既存のソースコードはテストが通らなくなっているため、対象外とした
       - name: Run Tests
