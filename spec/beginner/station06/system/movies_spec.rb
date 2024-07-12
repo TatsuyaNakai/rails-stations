@@ -1,6 +1,5 @@
 require 'rails_helper'
 require_relative '../system_helper'
-require_relative '../custom_helper'
 
 RSpec.describe 'Movies', type: :system do
   describe 'GET /movies' do

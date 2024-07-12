@@ -1,5 +1,4 @@
 require 'rails_helper'
-require_relative '../custom_helper'
 
 RSpec.describe MoviesController, type: :controller do
   describe 'GET /movies' do

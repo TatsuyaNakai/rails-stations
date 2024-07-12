@@ -1,6 +1,5 @@
 require 'rails_helper'
 require_relative '../../system_helper'
-require_relative '../../custom_helper'
 
 RSpec.describe 'Admin::Movies', type: :system do
   describe 'GET /admin/movies' do
@@ -41,6 +40,14 @@ RSpec.describe 'Admin::Movies', type: :system do
       visit admin_movies_path
 
       expect(page.html).to have_selector('table')
+    end
+  end
+
+  describe 'GET /admin/movies/new' do
+    it 'は、formタグが存在すること' do
+      visit new_admin_movie_path
+
+      expect(page.html).to have_selector('form')
     end
   end
 end
