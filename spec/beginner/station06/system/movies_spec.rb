@@ -27,4 +27,13 @@ RSpec.describe 'Movies', type: :system do
       expect(page).to have_selector('form[method="get"]')
     end
   end
+
+  describe 'GET /movies/:id' do
+    let!(:movie) { FactoryBot.create(:movie) }
+
+    it 'は、座席を予約するボタンが存在すること' do
+      visit movie_path(movie)
+      expect(page).to have_content('座席を予約する')
+    end
+  end
 end
