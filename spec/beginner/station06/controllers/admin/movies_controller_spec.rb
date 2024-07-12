@@ -36,7 +36,28 @@ RSpec.describe Admin::MoviesController, type: :controller do
   end
 
   describe 'POST /admin/movies' do
-    params = FactoryBot.attr
-    post :create, params: {  }
+    context '正しいパラメータのとき' do
+      it 'は、作品の追加ができること' do
+        movie_params = FactoryBot.attributes_for(:movie)
+        expect { post :create, params: { movie: movie_params } }.to change(Movie, :count).by(1)
+      end
+    end
+
+    context '不正なパラメータのとき' do
+      before do
+        movie = FactoryBot.create(:movie)
+        movie_params = FactoryBot.attributes_for(:movie, name: movie.name)
+
+        post :create, params: { movie: movie_params }
+      end
+
+      it 'は、422を返却すること' do
+        expect(response).to have_http_status '422'
+      end
+
+      it 'は、新規作成画面を表示すること' do
+        expect(response).to render_template(:new)
+      end
+    end
   end
 end
