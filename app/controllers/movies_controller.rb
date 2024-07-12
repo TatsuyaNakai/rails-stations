@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   # GET /movies
   def index
-    @movies = Movie.all
+    @movies = Movie.all.order(id: :desc)
 
     if params[:keyword].present?
       @movies = @movies.merge(
