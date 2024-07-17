@@ -22,6 +22,11 @@ class Sheet < ApplicationRecord
   belongs_to :screen
   has_many :reservations
 
+  # バリデーション
+  validates :column, numericality: { only_integer: true }
+
+  validates :row, presence: true
+
   # クラスメソッド
   def self.create_sheets_for_screen!(screen)
     return if screen.sheets.present?

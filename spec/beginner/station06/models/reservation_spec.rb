@@ -1,13 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
-  context '上映スケジュールが同じ、かつシートが同じ場合' do
-    let!(:reservation) { FactoryBot.create(:reservation) }
+  let(:schedule) { FactoryBot.create(:schedule) }
+  let(:sheet) { FactoryBot.create(:sheet, screen: schedule.screen) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:reservation) { FactoryBot.build(:reservation, schedule: schedule, sheet: sheet, user: user) }
 
-    it 'は、保存できないこと' do
-      obj = reservation.dup
-      obj.valid?
-      expect(obj.errors[:sheet]).to include('はすでに存在します')
+  describe 'バリデーション' do
+    it 'は、有効な属性を持っている場合、有効であること' do
+      expect(reservation).to be_valid
+    end
+
+    it 'は、同じスケジュールに対してシートが重複する場合、無効であること' do
+      FactoryBot.create(:reservation, schedule: schedule, sheet: sheet)
+      expect(reservation).to_not be_valid
+    end
+
+    it 'は、dateがない場合、無効であること' do
+      reservation.date = nil
+      expect(reservation).to_not be_valid
     end
   end
 end

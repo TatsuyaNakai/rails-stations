@@ -21,9 +21,6 @@ class Movie < ApplicationRecord
   has_many :schedules, dependent: :destroy
   has_many :reservations, through: :schedules
 
-  # フック
-  # before_destroy :check_is_showing_false
-
   # バリデーション
   validates :name, presence: true,
                    uniqueness: true,
@@ -40,15 +37,4 @@ class Movie < ApplicationRecord
                         url: true
 
   validates :is_showing, inclusion: [true, false]
-
-  # メソッド(Private)
-
-  # private
-
-  # Part5の要件に入っているが不要？
-  # def check_is_showing_false
-  #   errors.add(:base, '上映中の作品は削除できません') if is_showing?
-
-  #   throw :abort unless errors.empty?
-  # end
 end
