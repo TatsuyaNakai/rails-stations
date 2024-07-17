@@ -53,20 +53,3 @@ User.create!(name: 'User1', email: 'test@gmail.com', password: 'password')
 
 # ランキング
 # (Date.today - 2.months..Date.yesterday).each { |date| Ranking.insert_daily_rankings!(date) }
-
-# 以下はコンソールで実行してください。
-# 面談時にランキングが0件であることを確認します。
-# その後、以下のコマンドを実行して、前日分の予約が作成されることを確認します。
-# そして、クーロンの実行(3分後)を待ちます。
-# 既に前日のデータが作成されている場合には、先日のRankingを削除するようにしてください。(Rankingが作成されなくなります。)
-
-# ------------------------
-# シアター1の1番スクリーンにおける、a-1のシートを予約します。
-# 前日のスケジュールのいずれか(スケジュールは1日に1回しか上映しません)を予約します。
-# ------------------------
-# yesterday = Date.yesterday
-# start_time = Time.new(yesterday.year, yesterday.month, yesterday.day, 8, 0, 0)
-# schedule = Schedule.find_by(start_time: start_time)
-# sheet = Sheet.find_by(screen_id: schedule.screen_id)
-# user = User.first
-# schedule.reservations.create!(sheet_id: sheet.id, date: yesterday, user_id: user.id)
