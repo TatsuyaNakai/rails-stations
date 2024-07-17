@@ -25,15 +25,6 @@ class Ranking < ApplicationRecord
 
   validates :date, presence: true
 
-  # スコープ
-  scope :total_reservations_by_movie, lambda { |date = nil|
-    query = select('movie_id, SUM(reservation_count) as total_reservations')
-            .group(:movie_id)
-            .order('total_reservations DESC')
-    query = query.where(date: date) if date
-    query
-  }
-
   # クラスメソッド
   def self.insert_daily_rankings!(date = Date.yesterday)
     now = Time.current
@@ -43,7 +34,8 @@ class Ranking < ApplicationRecord
       reservation_count = movie.reservations.where(date: date).count
       { movie_id: movie.id, reservation_count: reservation_count, date: date, **timestamps }
     end
-    Ranking.insert_all!(attrs)
+    # 既にランキングが作成されている場合は、実施しない
+    Ranking.insert_all!(attrs) unless Ranking.where(date: date).present?
   end
 
   # メソッド(Private)

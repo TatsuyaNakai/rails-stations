@@ -37,26 +37,4 @@ RSpec.describe Ranking, type: :model do
       expect(Ranking.last.date).to eq(date)
     end
   end
-
-  describe '.total_reservations_by_movie' do
-    before do
-      Reservation.create!(date: date, schedule_id: schedule1.id, sheet_id: sheet1.id, user_id: user.id)
-      Reservation.create!(date: date, schedule_id: schedule2.id, sheet_id: sheet2.id, user_id: user.id)
-      Ranking.insert_daily_rankings!(date)
-    end
-
-    context 'date_range = nil のとき' do
-      it 'は、集計できること' do
-        expect(Ranking.total_reservations_by_movie.first.movie_id).to eq(movie1.id)
-        expect(Ranking.total_reservations_by_movie.first.total_reservations).to eq(1)
-      end
-    end
-
-    context 'date_range = Date のとき' do
-      it 'は、範囲を限定して集計できること' do
-        tommorow = Date.tomorrow
-        expect(Ranking.total_reservations_by_movie(tommorow)).to eq([])
-      end
-    end
-  end
 end
